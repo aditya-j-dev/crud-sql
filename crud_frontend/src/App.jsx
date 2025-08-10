@@ -1,10 +1,11 @@
-
 import { useState, useEffect  } from 'react'
 import './App.css'
 import ModalForm from './Components/ModalForm'
 import NavBar from './Components/Navbar'
 import TableList from './Components/TableList'
 import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,7 @@ function App() {
   
   const fetchClients = async () => {
         try {
-          const response  = await axios.get('http://localhost:3000/api/clients')
+          const response  = await axios.get(`${API_URL}/api/clients`)
           setTableData(response.data); // Set the fetched data
 
         } catch (err) {
@@ -40,7 +41,7 @@ function App() {
   const handleSubmit = async (newClientData) => {
     if (modalMode === 'add') {
       try {
-        const response = await axios.post('http://localhost:3000/api/clients', newClientData); // Replace with your actual API URL
+        const response = await axios.post(`${API_URL}/api/clients`, newClientData); // Replace with your actual API URL
         console.log('Client added:', response.data); // Log the response
         setTableData((prevData) => [...prevData, response.data]);
         // Optionally, update your state here to reflect the newly added client
@@ -52,7 +53,7 @@ function App() {
     } else {
       console.log('Updating client with ID:', clientData.id); // Log the ID being updated
             try {
-                const response = await axios.put(`http://localhost:3000/api/clients/${clientData.id}`, newClientData);
+                const response = await axios.put(`${API_URL}/api/clients/${clientData.id}`, newClientData);
                 console.log('Client updated:', response.data);
                 setTableData((prevData) =>
                   prevData.map((client) => (client.id === clientData.id ? response.data : client))

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useState} from 'react';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function TableList({ handleOpen, tableData, setTableData , searchTerm}) {
     const [error, setError] = useState(null);
 
@@ -18,7 +20,7 @@ export default function TableList({ handleOpen, tableData, setTableData , search
         const confirmDelete = window.confirm("Are you sure you want to delete this client?");
         if (confirmDelete) {
             try {
-                await axios.delete(`http://localhost:3000/api/clients/${id}`); // API call to delete client
+                await axios.delete(`${API_URL}/api/clients/${id}`); // API call to delete client
                 setTableData((prevData) => prevData.filter(client => client.id !== id)); // Update state
             } catch (err) {
                 setError(err.message); // Handle any errors
