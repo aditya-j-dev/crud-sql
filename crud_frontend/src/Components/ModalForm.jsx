@@ -15,11 +15,12 @@ export default function ModalForm({ isOpen , onClose, mode, OnSubmit,clientData}
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const clientData = {name, email, job, rate: Number(rate) , isactive: status}
-            await OnSubmit(clientData)
+            const clientData = { name, email, job, rate: Number(rate), isactive: status };
+            console.log('Submitting client data:', clientData); // Debug log
+            await OnSubmit(clientData); // Ensure this calls the correct API
             onClose();
         } catch (err) {
-            console.error("Error adding client" , err);
+            console.error("Error adding client:", err); // Log the error
         }
         
     }

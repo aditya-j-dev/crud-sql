@@ -19,10 +19,12 @@ function App() {
   
   const fetchClients = async () => {
         try {
+            console.log('API_URL:', API_URL); // Debug log
           const response  = await axios.get(`${API_URL}/api/clients`)
           setTableData(response.data); // Set the fetched data
 
         } catch (err) {
+            console.error('Error fetching clients:', err.message); // Log the error
             setError(err.message); // Set error message
         }
     };
