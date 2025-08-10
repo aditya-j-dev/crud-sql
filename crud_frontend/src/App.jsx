@@ -13,6 +13,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [clientData, setClientData] = useState(null);
   const [tableData, setTableData] = useState([]);
+  const [error, setError] = useState(null); // Add error state
 
 
   
@@ -22,7 +23,7 @@ function App() {
           setTableData(response.data); // Set the fetched data
 
         } catch (err) {
-            setError(err.message);
+            setError(err.message); // Set error message
         }
     };
 
